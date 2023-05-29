@@ -13,7 +13,9 @@ PDE_SELF_REFERENCE  equ 0x300        ; 使用第768个表项作为自映射项
 %define PG_DIRTY(x)            (x) << 6     ; 页表项的 Dirty 标志
 %define PG_SIZE_4MB(x)             (x) << 7     ; 页表项的 Page Size 标志
 
-%define KERNEL_PAGE_FLAGS   (PG_PRESENT(1) | PG_READ_WRITE(1) | PG_SIZE_4MB(0))
+%define KERNEL_PAGE_FLAGS   (PG_PRESENT(1) | PG_READ_WRITE(1) | PG_USER(0))
+%define USER_PAGE_FLAGS   (PG_PRESENT(1) | PG_READ_WRITE(1) | PG_USER(1))
+
 
 %define PTE_BASE            0xFFC00000   ; 页表的地址，紧随在页目录后面
 %define PTE_SELF_REFERENCE  (PDE_SELF_REFERENCE * 1024 + PTE_BASE >> 12)
